@@ -252,4 +252,11 @@ public class QuantityMeasurementTest {
         double additionOfUnits = quantityMeasurement.globalConverter(a,TONNE_TO_KG,GRAMS_TO_KG);
         Assert.assertEquals(1001, additionOfUnits, 00);
     }
+
+    @Test
+    public void givenFahrenheit_WhenConverted_ShouldReturn_Celsius() {
+        double a[] = {212};
+        double fahrenheitToCelsius = quantityMeasurement.globalConverter(a,FAHRENHEIT_TO_CELSIUS);
+        Assert.assertEquals(100, fahrenheitToCelsius, 00);
+    }
 }
