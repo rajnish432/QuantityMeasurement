@@ -231,4 +231,25 @@ public class QuantityMeasurementTest {
         double additionOfUnits = quantityMeasurement.globalConverter(a,NULL,ML_TO_LITRES);
         Assert.assertEquals(2.0, additionOfUnits, 00);
     }
+
+    @Test
+    public void givenKiloGram_WhenConverted_ShouldReturn_Ml() {
+        double a[] = {1};
+        double kgToGrams = quantityMeasurement.globalConverter(a,KG_TO_GRAMS);
+        Assert.assertEquals(1000, kgToGrams, 00);
+    }
+
+    @Test
+    public void givenTonne_WhenConverted_ShouldReturn_Kg() {
+        double a[] = {1};
+        double tonneToKg = quantityMeasurement.globalConverter(a,TONNE_TO_KG);
+        Assert.assertEquals(1000, tonneToKg, 00);
+    }
+
+    @Test
+    public void givenToSeparateUnitsAsTonneAndGram_WhenConverted_ShouldReturn_Kilogram() {
+        double a[] = {1,1000};
+        double additionOfUnits = quantityMeasurement.globalConverter(a,TONNE_TO_KG,GRAMS_TO_KG);
+        Assert.assertEquals(1001, additionOfUnits, 00);
+    }
 }
