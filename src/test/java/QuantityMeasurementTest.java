@@ -202,4 +202,18 @@ public class QuantityMeasurementTest {
         double additionOfUnits = quantityMeasurement.globalConverter(a,INCH_TO_INCH,CENTIMETER_TO_INCH);
         Assert.assertEquals(3,additionOfUnits,00);
     }
+
+    @Test
+    public void givenGallon_WhenConverted_ShouldReturn_Litres() {
+        double a[] = {1};
+        double gallonToLitres = quantityMeasurement.globalConverter(a, GALLONS_TO_LITRES);
+        Assert.assertEquals(3.78, gallonToLitres, 00);
+    }
+
+    @Test
+    public void givenLitre_WhenConverted_ShouldReturn_Ml() {
+        double a[] = {1};
+        double litreToMl = quantityMeasurement.globalConverter(a,LITRES_TO_ML);
+        Assert.assertEquals(1000, litreToMl, 00);
+    }
 }
