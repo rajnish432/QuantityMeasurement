@@ -9,6 +9,7 @@ import static com.quantitymeasurement.UnitConverter.Converter.*;
 public class QuantityMeasurementTest {
 
     QuantityMeasurement quantityMeasurement;
+    double a[];
 
     @Before
     public void setUp() throws Exception {
@@ -177,14 +178,14 @@ public class QuantityMeasurementTest {
     @Test
     public void givenToSeparateUnits_WhenConverted_ShouldReturn_Inches() {
         double a[]={2,2};
-        double additionOfUnits = quantityMeasurement.globalConverter(a, INCH_TO_INCH, INCH_TO_INCH);
+        double additionOfUnits = quantityMeasurement.globalConverter(a, NULL, NULL);
         Assert.assertEquals(4,additionOfUnits,00);
     }
 
     @Test
     public void givenToSeparateUnitsAsFtAndInch_WhenConverted_ShouldReturn_Inches() {
         double a[]={1,2};
-        double additionOfUnits = quantityMeasurement.globalConverter(a,FEET_TO_INCHES, INCH_TO_INCH);
+        double additionOfUnits = quantityMeasurement.globalConverter(a,FEET_TO_INCHES, NULL);
         Assert.assertEquals(14,additionOfUnits,00);
 
     }
@@ -199,7 +200,7 @@ public class QuantityMeasurementTest {
     @Test
     public void givenToSeparateUnitsAsInchAndCm_WhenConverted_ShouldReturn_Inches() {
         double a[]={2,2.5};
-        double additionOfUnits = quantityMeasurement.globalConverter(a,INCH_TO_INCH,CENTIMETER_TO_INCH);
+        double additionOfUnits = quantityMeasurement.globalConverter(a,NULL,CENTIMETER_TO_INCH);
         Assert.assertEquals(3,additionOfUnits,00);
     }
 
@@ -215,5 +216,19 @@ public class QuantityMeasurementTest {
         double a[] = {1};
         double litreToMl = quantityMeasurement.globalConverter(a,LITRES_TO_ML);
         Assert.assertEquals(1000, litreToMl, 00);
+    }
+
+    @Test
+    public void givenToSeparateUnitsAsGallonsAndLitres_WhenConverted_ShouldReturn_Litres() {
+        double a[] = {1,3.78};
+        double additionOfUnits = quantityMeasurement.globalConverter(a,GALLONS_TO_LITRES,NULL);
+        Assert.assertEquals(7.56, additionOfUnits, 00);
+    }
+
+    @Test
+    public void givenToSeparateUnitsAsLitreAndMl_WhenConverted_ShouldReturn_Litres() {
+        double a[] = {1,1000};
+        double additionOfUnits = quantityMeasurement.globalConverter(a,NULL,ML_TO_LITRES);
+        Assert.assertEquals(2.0, additionOfUnits, 00);
     }
 }
