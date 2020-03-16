@@ -1,4 +1,5 @@
 import com.quantitymeasurement.QuantityMeasurement;
+import com.quantitymeasurement.UnitConverter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -84,5 +85,37 @@ public class QuantityMeasurementTest {
         String name = "Rajnish";
         boolean equalityCheck = quantityMeasurement.equals(name);
         Assert.assertEquals(true, equalityCheck);
+    }
+
+    @Test
+    public void givenFeetandInches_WhenCompared_ShouldReturnEqual() {
+        Integer feet=0;
+        Integer inch=0;
+        boolean valueCheck = quantityMeasurement.unitCompare(feet, inch);
+        Assert.assertEquals(true,valueCheck);
+    }
+
+    @Test
+    public void givenFeet_WhenCompared_ShouldReturnNotEqual() {
+        double feetToInches = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.INCHES);
+        Assert.assertNotEquals(1.0,feetToInches);
+    }
+
+    @Test
+    public void givenInches_WhenCompared_ShouldReturnNotEqual() {
+        double inchesToFeet = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.FEET);
+        Assert.assertNotEquals(1.0,inchesToFeet);
+    }
+
+    @Test
+    public void givenFeet_WhenCompared_ShouldReturnInches() {
+        double feetToInches = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.INCHES);
+        Assert.assertEquals(12,feetToInches,0.0);
+    }
+
+    @Test
+    public void givenInches_WhenCompared_ShouldReturnFeet() {
+        double inchesToFeet = quantityMeasurement.convertFeetToInch(12.0, UnitConverter.Converter.FEET);
+        Assert.assertEquals(1,inchesToFeet,0.0);
     }
 }

@@ -2,6 +2,10 @@ package com.quantitymeasurement;
 
 public class QuantityMeasurement {
 
+    public double convertFeetToInch(Double unit, UnitConverter.Converter type) {
+       return unit*type.convertUnit;
+    }
+
     @Override
     public boolean equals(Object unit) {
         if (unit==null)
@@ -17,9 +21,7 @@ public class QuantityMeasurement {
 
     public boolean unitCompare(Object unit1, Object unit2) {
         if (unit1.equals(unit2))
-        {
             return true;
-        }
         return false;
     }
 }
