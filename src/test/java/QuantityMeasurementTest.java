@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.quantitymeasurement.UnitConverter.Converter.*;
+
 public class QuantityMeasurementTest {
 
     QuantityMeasurement quantityMeasurement;
@@ -97,67 +99,107 @@ public class QuantityMeasurementTest {
 
     @Test
     public void givenFeet_WhenCompared_ShouldReturnNotEqual() {
-        double feetToInches = quantityMeasurement.globalConverter(1.0, UnitConverter.Converter.FEET_TO_INCHES);
+        double a[]={1.0};
+        double feetToInches = quantityMeasurement.globalConverter(a, FEET_TO_INCHES);
         Assert.assertNotEquals(1.0,feetToInches);
     }
 
     @Test
     public void givenInches_WhenCompared_ShouldReturnNotEqual() {
-        double inchesToFeet = quantityMeasurement.globalConverter(1.0, UnitConverter.Converter.INCH_TO_FEET);
+        double a[]={1.0};
+        double inchesToFeet = quantityMeasurement.globalConverter(a, UnitConverter.Converter.INCH_TO_FEET);
         Assert.assertNotEquals(1.0,inchesToFeet);
     }
 
     @Test
     public void givenFeet_WhenCompared_ShouldReturnInches() {
-        double feetToInches = quantityMeasurement.globalConverter(1.0, UnitConverter.Converter.FEET_TO_INCHES);
+        double a[]={1.0};
+        double feetToInches = quantityMeasurement.globalConverter(a, FEET_TO_INCHES);
         Assert.assertEquals(12,feetToInches,0.0);
     }
 
     @Test
     public void givenInches_WhenCompared_ShouldReturnFeet() {
-        double inchesToFeet = quantityMeasurement.globalConverter(12.0, UnitConverter.Converter.INCH_TO_FEET);
+        double a[]={12.0};
+        double inchesToFeet = quantityMeasurement.globalConverter(a, UnitConverter.Converter.INCH_TO_FEET);
         Assert.assertEquals(1,inchesToFeet,0.0);
     }
 
     @Test
     public void givenFeet_WhenConverted_ShouldReturn_Yard() {
-        double feetToYard = Math.ceil(quantityMeasurement.globalConverter(3.0, UnitConverter.Converter.FEET_TO_YARD));
+        double a[]={3.0};
+        double feetToYard = Math.ceil(quantityMeasurement.globalConverter(a, UnitConverter.Converter.FEET_TO_YARD));
         Assert.assertEquals(1,feetToYard,00);
     }
 
     @Test
     public void givenOneFeet_WhenComparedWithOneInch_ShouldReturnNotEqual() {
-        double oneFeetToOneYard = quantityMeasurement.globalConverter(1.0, UnitConverter.Converter.FEET_TO_YARD);
+        double a[]={1.0};
+        double oneFeetToOneYard = quantityMeasurement.globalConverter(a, UnitConverter.Converter.FEET_TO_YARD);
         Assert.assertNotEquals(1.0,oneFeetToOneYard);
     }
 
     @Test
     public void givenOneInch_WhenComparedWithOneYard_ShouldReturnNotEqual() {
-        double inchToYard = quantityMeasurement.globalConverter(1.0, UnitConverter.Converter.INCHES_TO_YARD);
+        double a[]={1.0};
+        double inchToYard = quantityMeasurement.globalConverter(a, UnitConverter.Converter.INCHES_TO_YARD);
         Assert.assertNotEquals(1,inchToYard);
     }
 
     @Test
     public void givenYard_WhenConverted_ShouldReturn_Inch() {
-        double yardToInches = quantityMeasurement.globalConverter(1.0, UnitConverter.Converter.YARD_TO_INCHES);
+        double a[]={1.0};
+        double yardToInches = quantityMeasurement.globalConverter(a, UnitConverter.Converter.YARD_TO_INCHES);
         Assert.assertEquals(36,yardToInches,00);
     }
 
     @Test
     public void givenInch_WhenConverted_ShouldReturn_Yard() {
-        double inchToYard = quantityMeasurement.globalConverter(36.0, UnitConverter.Converter.INCHES_TO_YARD);
+        double a[]={36.0};
+        double inchToYard = quantityMeasurement.globalConverter(a, UnitConverter.Converter.INCHES_TO_YARD);
         Assert.assertEquals(1,inchToYard,00);
     }
 
     @Test
     public void givenYard_WhenConverted_ShouldReturn_Feet() {
-        double yardToFeet = quantityMeasurement.globalConverter(1.0, UnitConverter.Converter.YARD_TO_FEET);
+        double a[]={1.0};
+        double yardToFeet = quantityMeasurement.globalConverter(a, UnitConverter.Converter.YARD_TO_FEET);
         Assert.assertEquals(3,yardToFeet,00);
     }
 
     @Test
     public void givenInch_WhenConverted_ShouldReturn_Centimeter() {
-        double inchToCm = quantityMeasurement.globalConverter(2.0, UnitConverter.Converter.INCH_TO_CENTIMETER);
+        double a[]={2.0};
+        double inchToCm = quantityMeasurement.globalConverter(a, UnitConverter.Converter.INCH_TO_CENTIMETER);
         Assert.assertEquals(5,inchToCm,00);
+    }
+
+    @Test
+    public void givenToSeparateUnits_WhenConverted_ShouldReturn_Inches() {
+        double a[]={2,2};
+        double additionOfUnits = quantityMeasurement.globalConverter(a, INCH_TO_INCH, INCH_TO_INCH);
+        Assert.assertEquals(4,additionOfUnits,00);
+    }
+
+    @Test
+    public void givenToSeparateUnitsAsFtAndInch_WhenConverted_ShouldReturn_Inches() {
+        double a[]={1,2};
+        double additionOfUnits = quantityMeasurement.globalConverter(a,FEET_TO_INCHES, INCH_TO_INCH);
+        Assert.assertEquals(14,additionOfUnits,00);
+
+    }
+
+    @Test
+    public void givenToSeparateUnitsAsFtAndFt_WhenConverted_ShouldReturn_Inches() {
+        double a[]={1,1};
+        double additionOfUnits = quantityMeasurement.globalConverter(a,FEET_TO_INCHES,FEET_TO_INCHES);
+        Assert.assertEquals(24,additionOfUnits,00);
+    }
+
+    @Test
+    public void givenToSeparateUnitsAsInchAndCm_WhenConverted_ShouldReturn_Inches() {
+        double a[]={2,2.5};
+        double additionOfUnits = quantityMeasurement.globalConverter(a,INCH_TO_INCH,CENTIMETER_TO_INCH);
+        Assert.assertEquals(3,additionOfUnits,00);
     }
 }

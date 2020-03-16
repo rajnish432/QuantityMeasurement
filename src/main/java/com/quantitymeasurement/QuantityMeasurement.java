@@ -2,8 +2,11 @@ package com.quantitymeasurement;
 
 public class QuantityMeasurement {
 
-    public double globalConverter(Double unit, UnitConverter.Converter type) {
-        return unit*type.convertUnit;
+    public double globalConverter(double[] unit, UnitConverter.Converter ...type) {
+        double value = 0;
+        for(int i=0;i<unit.length;i++)
+        value+=unit[i]*type[i].convertUnit;
+        return value;
     }
 
     @Override
