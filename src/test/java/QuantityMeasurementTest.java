@@ -97,25 +97,61 @@ public class QuantityMeasurementTest {
 
     @Test
     public void givenFeet_WhenCompared_ShouldReturnNotEqual() {
-        double feetToInches = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.INCHES);
+        double feetToInches = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.FEET_TO_INCHES);
         Assert.assertNotEquals(1.0,feetToInches);
     }
 
     @Test
     public void givenInches_WhenCompared_ShouldReturnNotEqual() {
-        double inchesToFeet = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.FEET);
+        double inchesToFeet = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.INCH_TO_FEET);
         Assert.assertNotEquals(1.0,inchesToFeet);
     }
 
     @Test
     public void givenFeet_WhenCompared_ShouldReturnInches() {
-        double feetToInches = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.INCHES);
+        double feetToInches = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.FEET_TO_INCHES);
         Assert.assertEquals(12,feetToInches,0.0);
     }
 
     @Test
     public void givenInches_WhenCompared_ShouldReturnFeet() {
-        double inchesToFeet = quantityMeasurement.convertFeetToInch(12.0, UnitConverter.Converter.FEET);
+        double inchesToFeet = quantityMeasurement.convertFeetToInch(12.0, UnitConverter.Converter.INCH_TO_FEET);
         Assert.assertEquals(1,inchesToFeet,0.0);
+    }
+
+    @Test
+    public void givenFeet_WhenConverted_ShouldReturn_Yard() {
+        double feetToYard = Math.ceil(quantityMeasurement.convertFeetToInch(3.0, UnitConverter.Converter.FEET_TO_YARD));
+        Assert.assertEquals(1,feetToYard,00);
+    }
+
+    @Test
+    public void givenOneFeet_WhenComparedWithOneInch_ShouldReturnNotEqual() {
+        double oneFeetToOneYard = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.FEET_TO_YARD);
+        Assert.assertNotEquals(1.0,oneFeetToOneYard);
+    }
+
+    @Test
+    public void givenOneInch_WhenComparedWithOneYard_ShouldReturnNotEqual() {
+        double inchToYard = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.INCHES_TO_YARD);
+        Assert.assertNotEquals(1,inchToYard);
+    }
+
+    @Test
+    public void givenYard_WhenConverted_ShouldReturn_Inch() {
+        double yardToInches = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.YARD_TO_INCHES);
+        Assert.assertEquals(36,yardToInches,00);
+    }
+
+    @Test
+    public void givenInch_WhenConverted_ShouldReturn_Yard() {
+        double inchToYard = quantityMeasurement.convertFeetToInch(36.0, UnitConverter.Converter.INCHES_TO_YARD);
+        Assert.assertEquals(1,inchToYard,00);
+    }
+
+    @Test
+    public void givenYard_WhenConverted_ShouldReturn_Feet() {
+        double yardToFeet = quantityMeasurement.convertFeetToInch(1.0, UnitConverter.Converter.YARD_TO_FEET);
+        Assert.assertEquals(3,yardToFeet,00);
     }
 }
