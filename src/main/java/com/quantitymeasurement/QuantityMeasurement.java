@@ -2,7 +2,7 @@ package com.quantitymeasurement;
 
 public class QuantityMeasurement {
 
-    public double convertFeetToInch(Double unit, UnitConverter.Converter type) {
+    public double globalConverter(Double unit, UnitConverter.Converter type) {
         return unit*type.convertUnit;
     }
 
